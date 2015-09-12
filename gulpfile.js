@@ -1,6 +1,6 @@
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
-var reactify = require('reactify');
+var babelify = require('babelify');
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({
 	lazy: true
@@ -22,7 +22,7 @@ gulp.task('index', function() {
 
 gulp.task('build-jsx', function() {
 	return browserify('./front/react/main.js')
-		.transform(reactify)
+		.transform(babelify)
 		.bundle()
 		.pipe(source('main.js'))
 		.pipe(gulp.dest('./front/dist'));
