@@ -1,0 +1,22 @@
+{
+  "name": "yummy-turtle",
+  "version": "0.0.0",
+  "homepage": "https://github.com/justrdk/yummy-turtle",
+  "authors": [
+    "justrdk <osman.sist@gmail.com>"
+  ],
+  "description": "yummy turtle",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "~0.96.1",
+    "mdi": "~1.1.34",
+    "fontawesome": "~4.3.0"
+  }
+}
