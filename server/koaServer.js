@@ -6,8 +6,6 @@ import request from 'request';
 let app = koa();
 let router = new Router();
 
-import {shiftVowels, splitWords, sortAlphabetically, alternateCapCaseConsonants} from './wordManipulation.js';
-
 router.get('/getGuid', function*() {
 	//will create a class that does all the magic here, route was just to test connection between koa and react frontend
 	//get guid here and make request to api to get array of words and then do all the manipulation asked for.
