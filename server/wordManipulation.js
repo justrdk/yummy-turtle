@@ -31,16 +31,13 @@ export function splitWords(words) {
 }
 
 export function shiftVowels(words) {
-	let word = '';
 	let wordArray = [];
-	let tempWord = '';
 
 	for (let k in words) {
-		tempWord = words[k];
 		wordArray = words[k].split('');
 
-		for (var i = 0; i < tempWord.length; i++) {
-			let currentChar = tempWord[i];
+		for (var i = 0; i < wordArray.length; i++) {
+			let currentChar = wordArray[i];
 
 			if (isVowel(currentChar)) {
 
