@@ -78,7 +78,7 @@ export function parseConsonantsVowels(words, fibo) {
 			let currentChar = temp[k];
 
 			if (currentChar.toLowerCase() !== 'a' && currentChar.toLowerCase() !== 'e' && currentChar.toLowerCase() !== 'i' &&
-				currentChar.toLowerCase() !== 'o' && currentChar.toLowerCase() !== 'u' && currentChar !== '$') {
+				currentChar.toLowerCase() !== 'o' && currentChar.toLowerCase() !== 'u') {
 
 				if (firstCap) {
 					temp[k] = currentChar.toUpperCase();
