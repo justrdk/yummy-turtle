@@ -12,13 +12,14 @@ router.get('/getGuid', function*() {
 	let finalValue = '';
 	//will create a class that does all the magic here, route was just to test connection between koa and react frontend
 	//get guid here and make request to api to get array of words and then do all the manipulation asked for.
-	for (let i = 0; i < 20; i++) {
+	// for (let i = 0; i < 20; i++) {
 		let guid = Guid.raw();
 		stringManipulator.getWordsAndFiboNumber(guid, (data) => {
+			
 			finalValue = stringManipulator.executeMain(data.words, data.startingFibonacciNumber);
 			stringManipulator.postValues(finalValue, guid);
 		});
-	}
+	// }
 });
 
 

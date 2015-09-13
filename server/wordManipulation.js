@@ -33,25 +33,23 @@ export function splitWords(words) {
 export function shiftVowels(words) {
 	let word = '';
 	let wordArray = [];
-	let newWord = '';
+	let tempWord = '';
 
 	for (let k in words) {
+		tempWord = words[k];
 		wordArray = words[k].split('');
 
-		for (var i = 0; i < wordArray.length; i++) {
-			let currentChar = wordArray[i];
+		for (var i = 0; i < tempWord.length; i++) {
+			let currentChar = tempWord[i];
 
-			if (currentChar.toLowerCase() === 'a' || currentChar.toLowerCase() === 'e' || currentChar.toLowerCase() === 'i' ||
-				currentChar.toLowerCase() === 'o' || currentChar.toLowerCase() === 'u') {
+			if (isVowel(currentChar)) {
 
 				if (i === (wordArray.length - 1)) {
 					wordArray.splice(0, 0, wordArray.splice(i, 1)[0]);
 				} else {
 					let rightIndex = i + 1;
-					if (wordArray[rightIndex].toLowerCase() !== currentChar.toLowerCase()) {
-						wordArray.splice(rightIndex, 0, wordArray.splice(i, 1)[0]);
-						i++;
-					}
+					wordArray.splice(rightIndex, 0, wordArray.splice(i, 1)[0]);
+					i++;
 				}
 			}
 		}
@@ -73,8 +71,7 @@ export function parseConsonantsVowels(words, fibo) {
 		for (let k in wordArray) {
 			let currentChar = wordArray[k];
 
-			if (currentChar.toLowerCase() !== 'a' && currentChar.toLowerCase() !== 'e' && currentChar.toLowerCase() !== 'i' &&
-				currentChar.toLowerCase() !== 'o' && currentChar.toLowerCase() !== 'u') {
+			if (!isVowel(currentChar)) {
 
 				if (firstCap) {
 					wordArray[k] = currentChar.toUpperCase();
@@ -84,9 +81,7 @@ export function parseConsonantsVowels(words, fibo) {
 
 				firstCap = !firstCap;
 
-			} else if (currentChar.toLowerCase() === 'a' || currentChar.toLowerCase() === 'e' || currentChar.toLowerCase() === 'i' ||
-				currentChar.toLowerCase() === 'o' || currentChar.toLowerCase() === 'u') {
-
+			} else if (isVowel(currentChar)) {
 				wordArray[k] = fibonacci(fiboIndex);
 				fiboIndex++;
 			}
@@ -117,6 +112,11 @@ export function toAscii(words) {
 export function base64Encoding(word) {
 	return new Buffer(word).toString('base64');
 }
+
+let isVowel = (character) => {
+	let vowels = ['a', 'e', 'i', 'o', 'u'];
+	return vowels.includes(character.toLowerCase());
+};
 
 let fibonacci = (n) => {
 	let a = 0;
