@@ -51,7 +51,9 @@ export function shiftVowels(words) {
 					temp.splice(0, 0, temp.splice(i, 1)[0]);
 				} else {
 					let rightIndex = parseInt(i, 10) + 1;
-					temp.splice(rightIndex, 0, temp.splice(i, 1)[0]);
+					if (word[rightIndex].toLowerCase() !== currentChar.toLowerCase()) {
+						temp.splice(rightIndex, 0, temp.splice(i, 1)[0]);
+					}
 				}
 			}
 		}
