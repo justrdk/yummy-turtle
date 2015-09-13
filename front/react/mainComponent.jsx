@@ -8,9 +8,8 @@ class Component extends React.Component {
 		};
 	}
 	getGuid() {
-		var self = this;
-		$.get("/getGuid", function(response) {
-			self.setState({
+		$.get("/getGuid", (response) => {
+			this.setState({
 				guid: response.payload
 			});
 		});
@@ -31,5 +30,5 @@ class Component extends React.Component {
 	}
 }
 
-Component.defaultProps = { guid: '' };
 export default Component;
+
