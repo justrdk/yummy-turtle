@@ -30,60 +30,56 @@ export function splitWords(words) {
 	return newWords;
 }
 
-export function sortAlphabetically(words) {
-	return words.sort();
-}
-
 export function shiftVowels(words) {
 	let word = '';
-	let temp = [];
+	let wordArray = [];
 	let newWord = '';
 
 	for (let k in words) {
-		word = words[k];
-		temp = word.split('');
+		wordArray = words[k].split('');
 
-		for (let i in word) {
-			let currentChar = word[i];
+		for (var i = 0; i < wordArray.length; i++) {
+			let currentChar = wordArray[i];
 
 			if (currentChar.toLowerCase() === 'a' || currentChar.toLowerCase() === 'e' || currentChar.toLowerCase() === 'i' ||
 				currentChar.toLowerCase() === 'o' || currentChar.toLowerCase() === 'u') {
 
-				if (i == (word.length - 1)) {
-					temp.splice(0, 0, temp.splice(i, 1)[0]);
+				if (i === (wordArray.length - 1)) {
+					wordArray.splice(0, 0, wordArray.splice(i, 1)[0]);
 				} else {
-					let rightIndex = parseInt(i, 10) + 1;
-					if (word[rightIndex].toLowerCase() !== currentChar.toLowerCase()) {
-						temp.splice(rightIndex, 0, temp.splice(i, 1)[0]);
+					let rightIndex = i + 1;
+					if (wordArray[rightIndex].toLowerCase() !== currentChar.toLowerCase()) {
+						wordArray.splice(rightIndex, 0, wordArray.splice(i, 1)[0]);
+						i++;
 					}
 				}
 			}
 		}
 
-		words[k] = temp.join("");
+		words[k] = wordArray.join("");
 	}
 
 	return words;
 }
 
 export function parseConsonantsVowels(words, fibo) {
-	let temp = [];
+	let wordArray = [];
 	let firstCap = words[0][0] === words[0][0].toUpperCase();
 	let fiboIndex = fibonacciIndex(fibo);
 
 	for (let i in words) {
-		temp = words[i].split('');
+		wordArray = words[i].split('');
 
-		for (let k in temp) {
-			let currentChar = temp[k];
+		for (let k in wordArray) {
+			let currentChar = wordArray[k];
 
 			if (currentChar.toLowerCase() !== 'a' && currentChar.toLowerCase() !== 'e' && currentChar.toLowerCase() !== 'i' &&
 				currentChar.toLowerCase() !== 'o' && currentChar.toLowerCase() !== 'u') {
 
 				if (firstCap) {
-					temp[k] = currentChar.toUpperCase();
+					wordArray[k] = currentChar.toUpperCase();
 				} else {
-					temp[k] = currentChar.toLowerCase();
+					wordArray[k] = currentChar.toLowerCase();
 				}
 
 				firstCap = !firstCap;
@@ -91,20 +87,16 @@ export function parseConsonantsVowels(words, fibo) {
 			} else if (currentChar.toLowerCase() === 'a' || currentChar.toLowerCase() === 'e' || currentChar.toLowerCase() === 'i' ||
 				currentChar.toLowerCase() === 'o' || currentChar.toLowerCase() === 'u') {
 
-				temp[k] = fibonacci(fiboIndex);
+				wordArray[k] = fibonacci(fiboIndex);
 				fiboIndex++;
 			}
 		}
 
-		words[i] = temp.join("");
+		words[i] = wordArray.join("");
 
 	}
 
 	return words;
-}
-
-export function reverseAlphabeticalOrder(words) {
-	return words.reverse();
 }
 
 export function toAscii(words) {
@@ -126,7 +118,7 @@ export function base64Encoding(word) {
 	return new Buffer(word).toString('base64');
 }
 
-function fibonacci(n) {
+let fibonacci = (n) => {
 	let a = 0;
 	let b = 1;
 	let f = 1;
@@ -137,14 +129,14 @@ function fibonacci(n) {
 		b = f;
 	}
 	return f;
-}
+};
 
-function fibonacciIndex(fib) {
+let fibonacciIndex = (fib) => {
 	fib = BigInteger(fib);
 	var x = fib.multiply(Math.sqrt(5)).add((1 / 2));
 	return Math.round(Math.log(x) / Math.log(phi()));
-}
+};
 
-function phi() {
+let phi = () => {
 	return (1 + Math.sqrt(5)) / 2;
-}
+};
