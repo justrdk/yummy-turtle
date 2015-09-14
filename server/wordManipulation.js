@@ -1,6 +1,4 @@
-const englishWords = ["cats", "rule", "dogs", "drool", "clean", "code", "materials", "needed", "this", "is", "hard",
-	"what", "are", "you", "smoking", "shot", "gun", "down", "river", "super", "man"
-];
+const englishWords = ["drool", "cats", "clean", "code", "dogs", "materials", "needed", "this", "is", "hard", "what", "are", "you", "smoking", "shot", "gun", "down", "river", "super", "man", "rule", "acklen", "developers", "are", "amazing"];
 import BigInteger from 'big-integer';
 
 
@@ -45,8 +43,12 @@ export function shiftVowels(words) {
 					wordArray.splice(0, 0, wordArray.splice(i, 1)[0]);
 				} else {
 					let rightIndex = i + 1;
-					wordArray.splice(rightIndex, 0, wordArray.splice(i, 1)[0]);
-					i++;
+					if (!isVowel(wordArray[rightIndex].toLowerCase())) {
+						wordArray.splice(rightIndex, 0, wordArray.splice(i, 1)[0]);
+						i++;
+					} else {
+						i = i + 2;
+					}
 				}
 			}
 		}
