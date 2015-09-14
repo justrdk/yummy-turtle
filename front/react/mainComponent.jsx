@@ -4,16 +4,29 @@ class Component extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			guid: ''
+			data: {},
+			encodedMessage: ''
 		};
 	}
-	getGuid() {
-		$.get("/getGuid", (response) => {
+	getData() {
+		$.get('/getData', (response) => {
 			this.setState({
-				guid: response.payload
+				data: response.payload
 			});
 		});
 	}
+
+	getEncodedMessage() {
+		$.get('/getEncodedMessage', {
+			words: this.state.data.words,
+			fibo: this.state.data.fibo
+		}).done((data) => {
+			this.setState({
+				encodedMessage: data.payload.encodedMessage
+			});
+		});
+	}
+
 	render() {
 		return <div>
 				<div className="page-header">
@@ -21,10 +34,25 @@ class Component extends React.Component {
 				</div>
 				<div className="row">
 					<div className="input-field col s4 offset-s2">
-						<input readOnly placeholder="Placeholder" id="first_name" type="text" className="validate" value={this.state.guid} />
-						<a className="red btn" onClick={this.getGuid.bind(this)}>Get GUID</a>
-						<label for="first_name">GUID</label>
+						<input readOnly placeholder="Placeholder" type="text" className="validate" value={this.state.data.guid} />
+						<label>GUID</label>
 					</div>
+				</div>
+				<div className="row">
+					<div className="input-field col s8 offset-s2">
+						<input readOnly placeholder="Placeholder" type="text" className="validate" value={this.state.data.words}/>
+						<label>Words</label>
+					</div>
+				</div>
+				<div className="row">
+					<div className="input-field col s12">
+						<textarea readOnly placeholder="Placeholder" className="materialize-textarea"  value={this.state.encodedMessage}></textarea>
+						<label>Encoded Message</label>
+					</div>
+				</div>
+				<div className="row center-align">
+					<a className="red btn" onClick={this.getData.bind(this)}>Get Guid and Words</a>
+					<a className="blue btn" onClick={this.getEncodedMessage.bind(this)}>Get Encoded Message</a>
 				</div>
 			</div>;
 	}
