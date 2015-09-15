@@ -109,7 +109,7 @@ export function base64Encoding(word) {
 }
 
 let isVowel = (character) => {
-	let vowels = ['a', 'e', 'i', 'o', 'u'];
+	let vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
 	return vowels.includes(character.toLowerCase());
 };
 
