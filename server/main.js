@@ -32,18 +32,19 @@ export class StringManipulator {
 		return resultMessage;
 	}
 
-	postValues(message, guid) {
+	postValues(guid, message, cb) {
 		request.post({
 			url: 'http://internal-comfybuffalo-1-dev.apphb.com/values/' + guid,
 			form: {
 				encodedValue: message,
 				emailAddress: 'osman.sist@gmail.com',
 				name: 'Osman',
-				webhookUrl: 'https://github.com/justrdk',
+				webhookUrl: 'http://12a5bf9a.ngrok.io/secret',
 				repoUrl: 'https://github.com/justrdk/yummy-turtle'
 			}
 		}, function(err, httpResponse, body) {
-			console.log('body', body);
+			console.log('asdas', body);
+			cb(body);
 		});
 	}
 }
